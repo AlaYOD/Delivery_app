@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     Log.d("MyTag", "This is a debug message 6");
 
-                                    Intent intent = new Intent(MainActivity.this, home.class);
+                                    Intent intent = new Intent(MainActivity.this, Cafeterias.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
