@@ -110,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
                                     if(checkbox.isChecked()){
                                         if(!flag) {
+
                                             editor.putString(NAME, name);
                                             editor.putString(PASS, password);
                                             editor.putBoolean(FLAG, true);
