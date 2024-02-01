@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.deliveryapp.models.Business;
 import com.example.deliveryapp.models.Cafeteria;
 
 import java.util.ArrayList;
@@ -20,13 +21,13 @@ public class Cafeteria_Adapter extends RecyclerView.Adapter<Cafeteria_Adapter.Vi
     private final RecyclerViewInterface recyclerViewInterface;
     private final Context context;
 
-    private final ArrayList<Cafeteria> cafeteriasArrayList;
+    private final ArrayList<Business> cafeteriasArrayList;
 
-    public Cafeteria_Adapter(Context context, ArrayList<Cafeteria> cafeteriaArrayList,
+    public Cafeteria_Adapter(Context context, ArrayList<Business> cafeteriaArrayList,
                              RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.cafeteriasArrayList = cafeteriaArrayList;
-       // Log.d("hosam", cafeteriasArrayList.get(0).getDesc());
+// Log.d("hosam", cafeteriasArrayList.get(0).getDesc());
         this.recyclerViewInterface = recyclerViewInterface;
 
     }
@@ -34,26 +35,26 @@ public class Cafeteria_Adapter extends RecyclerView.Adapter<Cafeteria_Adapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // to inflate the layout for each item of recycler view.
+// to inflate the layout for each item of recycler view.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_layout, parent, false);
         return new ViewHolder(view, recyclerViewInterface);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // to set data to textview and imageview of each card layout
-        Cafeteria model = cafeteriasArrayList.get(position);
-        holder.txtCafeteriaName.setText(model.getName());
-       // Log.d("hosam1",model.getDesc() );
-        holder.imgCafeteria.setImageResource(model.getImg());
+// to set data to textview and imageview of each card layout
+        Business model = cafeteriasArrayList.get(position);
+        holder.txtCafeteriaName.setText(model.getBusinessName());
+// Log.d("hosam1",model.getDesc() );
+//        holder.imgCafeteria.setImageResource(model.getImg());
 
 
-        holder.ratingBar.setRating((float)model.getRating());
+        holder.ratingBar.setRating(3);
     }
 
     @Override
     public int getItemCount() {
-        // this method is used for showing the number of card items in the recycler view
+// this method is used for showing the number of card items in the recycler view
         return cafeteriasArrayList.size();
     }
 
@@ -66,7 +67,7 @@ public class Cafeteria_Adapter extends RecyclerView.Adapter<Cafeteria_Adapter.Vi
 
         public ViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
-            // update the ID's to match the new ones in your card_layout.xml
+// update the ID's to match the new ones in your card_layout.xml
             imgCafeteria = itemView.findViewById(R.id.imgCafeteria);
             txtCafeteriaName = itemView.findViewById(R.id.txtCafeteriaName);
             ratingBar = itemView.findViewById(R.id.ratingBar);

@@ -4,7 +4,7 @@ public class Food {
 
     private String name;
     private String desc;
-    private String img;
+    private int img;
     private double price;
     private String cafeteria;
 
@@ -13,7 +13,7 @@ public class Food {
 
     }
 
-    public Food(String name, String desc, String img, double price, String cafeteria) {
+    public Food(String name, String desc, int img, double price, String cafeteria) {
         this.name = name;
         this.desc = desc;
         this.img = img;
@@ -38,11 +38,11 @@ public class Food {
         this.desc = desc;
     }
 
-    public String getImg() {
+    public int getImg() {
         return img;
     }
 
-    public void setImg(String img) {
+    public void setImg(int img) {
         this.img = img;
     }
 

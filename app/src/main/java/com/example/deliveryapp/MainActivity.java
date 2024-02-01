@@ -23,6 +23,21 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
+
 public class MainActivity extends AppCompatActivity {
     CheckBox checkbox;
     Button buttonLogin;
@@ -76,58 +91,81 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("MyTag", "This is a debug message 2");
 
                 progressBar.setVisibility(View.VISIBLE);
-                String email, password;
-                email = editTextEmail.getText().toString();
-                password = editTextPassword.getText().toString();
-                Log.d("MyTag", "This is a debug message ooo");
+                String email = editTextEmail.getText().toString();
+                String password = editTextPassword.getText().toString();
+                Intent intent = new Intent(MainActivity.this, home.class);
+                startActivity(intent);
 
-                if(TextUtils.isEmpty(email)){
-                    Log.d("MyTag", "This is a debug message 3");
-
+                if (TextUtils.isEmpty(email)) {
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(MainActivity.this, "Enter email", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(TextUtils.isEmpty(password)){
-                    Log.d("MyTag", "This is a debug message 4");
-
+                if (TextUtils.isEmpty(password)) {
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(MainActivity.this, "Enter password", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener( new OnCompleteListener<AuthResult>() {
 
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                Log.d("MyTag", "This is a debug message 5");
+                OkHttpClient client = new OkHttpClient();
+                String url = "http://10.0.2.2:5000/login";
 
-                                progressBar.setVisibility(View.GONE);
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
+                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                JSONObject json = new JSONObject();
+                try {
+                    json.put("email", email);
+                    json.put("password", password);
+                } catch (JSONException e) {
+                    Log.e("JSON Error", "Error creating JSON: ", e);
+                    progressBar.setVisibility(View.GONE);
+                    return;
+                }
 
-                                    String name = editTextEmail.getText().toString().trim();
-                                    String password = editTextPassword.getText().toString().trim();
+                RequestBody body = RequestBody.create(JSON, json.toString());
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(body)
+                        .build();
 
-                                    if(checkbox.isChecked()){
-                                        if(!flag) {
-                                            editor.putString(NAME, name);
-                                            editor.putString(PASS, password);
-                                            editor.putBoolean(FLAG, true);
-                                            editor.commit();
-                                        }
 
-                                    }
-                                    Log.d("MyTag", "This is a debug message 6");
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        runOnUiThread(() -> {
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+                        });
+                    }
 
-                                    Intent intent = new Intent(MainActivity.this, Cafeterias.class);
-                                    startActivity(intent);
-                                    finish();
-                                } else {
-                                    Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                                }
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        runOnUiThread(() -> progressBar.setVisibility(View.GONE));
+                        final String myResponse;
+                        if (response.body() != null) {
+                            myResponse = response.body().string(); // Read the response
+                        } else {
+                            myResponse = "No response body";
+                        }
+                        runOnUiThread(() -> {
+                            if (response.isSuccessful()) {
+                                Toast.makeText(MainActivity.this, "Success: " + myResponse, Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(MainActivity.this, home.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                // Handle unsuccessful response, e.g., server returned error code
+                                Toast.makeText(MainActivity.this, "Error: " + myResponse, Toast.LENGTH_LONG).show();
                             }
                         });
+                    }
+                });
             }
+
+
+
+
+
+
         });
 
     }
