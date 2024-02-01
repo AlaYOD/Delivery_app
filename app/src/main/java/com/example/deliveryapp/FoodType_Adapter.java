@@ -17,10 +17,10 @@ public class FoodType_Adapter extends RecyclerView.Adapter<FoodType_Adapter.View
     private final RecyclerViewInterface recyclerViewInterface;
     private final Context context;
 
-    private final ArrayList<Food> FoodArrayList;
+    private final ArrayList<Items> FoodArrayList;
 
-    public FoodType_Adapter(Context context, ArrayList<Food> cafeteriaArrayList,
-                             RecyclerViewInterface recyclerViewInterface) {
+    public FoodType_Adapter(Context context, ArrayList<Items> cafeteriaArrayList,
+                            RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.FoodArrayList = cafeteriaArrayList;
         // Log.d("hosam", cafeteriasArrayList.get(0).getDesc());
@@ -39,7 +39,7 @@ public class FoodType_Adapter extends RecyclerView.Adapter<FoodType_Adapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // to set data to textview and imageview of each card layout
-        Food model = FoodArrayList.get(position);
+        Items model = FoodArrayList.get(position);
         holder.txtFoodType.setText(model.getTitle());
         // Log.d("hosam1",model.getDesc() );
         holder.imgFood.setImageResource(model.getImageResource());
@@ -61,7 +61,7 @@ public class FoodType_Adapter extends RecyclerView.Adapter<FoodType_Adapter.View
         public ViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
             // update the ID's to match the new ones in your card_layout.xml
-            imgFood = itemView.findViewById(R.id.imgFood);
+            imgFood = itemView.findViewById(R.id.itemimgFood);
             txtFoodType = itemView.findViewById(R.id.txtFoodType);
 
             itemView.setOnClickListener(new View.OnClickListener() {

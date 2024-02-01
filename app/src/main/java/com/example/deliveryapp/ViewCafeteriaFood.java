@@ -1,11 +1,12 @@
 package com.example.deliveryapp;
-
-
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -17,13 +18,14 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
+import com.example.deliveryapp.models.Business;
 public class ViewCafeteriaFood extends AppCompatActivity implements RecyclerViewInterface {
 
     private DrawerLayout drawerLayout;
-   private ImageView image_chosen;
-   private TextView txtChosen;
+    private ImageView image_chosen;
+    private TextView txtChosen;
     private RecyclerView recFood;
-    Cafeteria  currCafeteria;
+    Business  currCafeteria;
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
     private Gson gson = new Gson();
@@ -31,26 +33,46 @@ public class ViewCafeteriaFood extends AppCompatActivity implements RecyclerView
     private boolean flag = false;
     public static final String FLAG = "FLAG";
 
-    private ArrayList<Food> types = new ArrayList<Food>();
+    private ArrayList<Items> types = new ArrayList<Items>();
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.foods_layout);
         setupPrefs();
-       // Toast.makeText(this, prefs.getString("Cafeteria1",""), Toast.LENGTH_SHORT).show();
-        String str = prefs.getString("Cafeteria1","");
-        if(str!=null) {
+        // Toast.makeText(this, prefs.getString("Cafeteria1",""), Toast.LENGTH_SHORT).show();
+        String str = prefs.getString("selectedBusiness","");
+        Log.e("choser","000");
 
-            currCafeteria = gson.fromJson(str, Cafeteria.class);
+        if(str!=null && !str.isEmpty()) {
 
-            // Toast.makeText(this, currCafeteria.getName()+ currCafeteria.getImg(), Toast.LENGTH_SHORT).show();
+            currCafeteria = gson.fromJson(str, Business.class);
+            Log.e("choser","001");
+             Toast.makeText(this, currCafeteria.getBusinessName()+ currCafeteria.getManager(), Toast.LENGTH_SHORT).show();
 
+        } else{
+            Log.e("Choser","009");
         }
-        setupViews();
+
+        Log.e("choser","002");
+        drawerLayout = findViewById(R.id.my_drawer_layout);
+        recFood = findViewById(R.id.recFood);
+        image_chosen=findViewById(R.id.cafeteria_chosen);
+        txtChosen=findViewById(R.id.txtCafeteriaChosen);
+//        image_chosen.setImageResource(R.drawable.left_arrow);
+        txtChosen.setText(currCafeteria.getBusinessName());
+
+        Log.d("ViewCafeteriaFood", "recFood is null: " + (recFood == null));
+        Log.d("currCafeteria", "recFood is null: " + (currCafeteria.getBusinessName() == null));
+        Log.d("ViewCafeteriaFood", "recFood: " + (recFood == null));
+
+        Log.e("choser","003");
+//        setupViews();
         addTypeOfFood();
 
+        Log.e("choser","007");
 
 
 
@@ -65,51 +87,53 @@ public class ViewCafeteriaFood extends AppCompatActivity implements RecyclerView
 
 
     private void addTypeOfFood() {
-        Food drink=new Food(R.drawable.drink,"Drinks");
-        Food meal=new Food(R.drawable.meal,"Meals");
-        Food sandwich =new Food(R.drawable.sandwich,"Sandwiches");
+        Log.e("choser","003");
+
+        Items drink=new Items(R.drawable.drink,"Drinks");
+        Items meal=new Items(R.drawable.meal,"Meals");
+        Items sandwich =new Items(R.drawable.sandwich,"Sandwiches");
 
         types.add(drink);
         types.add(meal);
         types.add(sandwich);
+        Log.e("choser","004");
 
         FoodType_Adapter fadapter = new FoodType_Adapter(this, types, this);
+        Log.e("choser","005");
 
-        // Ensure that recFood is not null before calling setLayoutManager
         if (recFood != null) {
+            Log.e("choser","006");
+
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
             recFood.setLayoutManager(linearLayoutManager);
             recFood.setAdapter(fadapter);
+            Log.e("choser","007");
+
         } else {
-            // Handle the case where recFood is null (log an error, show a message, etc.)
             Log.e("ViewCafeteriaFood", "recFood is null");
-        }}
+        }
+    }
 
 
 
     private void setupViews() {
-        drawerLayout = findViewById(R.id.my_drawer_layout);
-        recFood = findViewById(R.id.recFood);
-        image_chosen=findViewById(R.id.cafeteria_chosen);
-        txtChosen=findViewById(R.id.txtCafeteriaChosen);
-        image_chosen.setImageResource(currCafeteria.getImg());
-        txtChosen.setText(currCafeteria.getName());
-        Log.d("ViewCafeteriaFood", "recFood is null: " + (recFood == null));
+
+
     }
 
 
     @Override
     public void onItemClick(int pos) {
 
-//        Food currFood = types.get(pos);
-//        String foodString = gson.toJson(currFood);
-//        editor.putString("Food", foodString);
-//        editor.commit();
+        Items currItem = types.get(pos);
+        String itemString = gson.toJson(currItem);
+        editor.putString("ITEM", itemString);
+        Toast.makeText(this, prefs.getString("ITEM",""), Toast.LENGTH_SHORT).show();
+        editor.commit();
 
-       //   Intent intent = new Intent( .this, .class);
-       //  startActivity(intent);
+        Intent intent = new Intent( ViewCafeteriaFood.this,Foods.class);
+        startActivity(intent);
 
 
     }
 }
-

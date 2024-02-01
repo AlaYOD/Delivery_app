@@ -95,32 +95,45 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/email" />
+            <EditText
+                android:id="@+id/userMobile"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:hint="UserMobile"
+                android:inputType="textPassword"
+                app:layout_constraintTop_toBottomOf="@+id/userName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                 />
 
             <EditText
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="72dp"
+                android:layout_marginTop="16dp"
                 android:ems="10"
                 android:hint="Enter Your Passeord"
                 android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/email" />
+                app:layout_constraintTop_toBottomOf="@+id/userMobile" />
 
             <EditText
                 android:id="@+id/editConfermPassword"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="144dp"
+                android:layout_marginTop="16dp"
                 android:ems="10"
                 android:hint="Conferm Passeord "
                 android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/email" />
+                app:layout_constraintTop_toBottomOf="@+id/password" />
 
             <Button
                 android:id="@+id/btn_Register"
