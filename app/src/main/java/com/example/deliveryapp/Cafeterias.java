@@ -51,9 +51,9 @@ public class Cafeterias extends AppCompatActivity implements RecyclerViewInterfa
 
 
     private void addCafeteria() {
-        Cafeteria vanila = new Cafeteria("vanaila", R.drawable.vanila, "best for sweet drinks", 5);
-        Cafeteria maramia = new Cafeteria("maramia", R.drawable.maramia, "sweet drinks", 3);
-        Cafeteria burger = new Cafeteria("Burger", R.drawable.burger, "meet", 2);
+        Cafeteria vanila = new Cafeteria("vanaila", R.drawable.vanila, "best for sweet drinks", 5,1);
+        Cafeteria maramia = new Cafeteria("Maramia", R.drawable.maramia, "sweet drinks", 3,3);
+        Cafeteria burger = new Cafeteria("Burger", R.drawable.burger, "meet", 2,2);
 
         Log.d("vanila",vanila.getDesc());
         cafeterias.add(burger);

@@ -17,9 +17,9 @@ public class FoodType_Adapter extends RecyclerView.Adapter<FoodType_Adapter.View
     private final RecyclerViewInterface recyclerViewInterface;
     private final Context context;
 
-    private final ArrayList<Food> FoodArrayList;
+    private final ArrayList<Items> FoodArrayList;
 
-    public FoodType_Adapter(Context context, ArrayList<Food> cafeteriaArrayList,
+    public FoodType_Adapter(Context context, ArrayList<Items> cafeteriaArrayList,
                              RecyclerViewInterface recyclerViewInterface) {
         this.context = context;
         this.FoodArrayList = cafeteriaArrayList;
@@ -39,7 +39,7 @@ public class FoodType_Adapter extends RecyclerView.Adapter<FoodType_Adapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         // to set data to textview and imageview of each card layout
-        Food model = FoodArrayList.get(position);
+        Items model = FoodArrayList.get(position);
         holder.txtFoodType.setText(model.getTitle());
         // Log.d("hosam1",model.getDesc() );
         holder.imgFood.setImageResource(model.getImageResource());

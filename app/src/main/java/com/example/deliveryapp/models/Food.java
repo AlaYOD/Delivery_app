@@ -1,24 +1,39 @@
 package com.example.deliveryapp.models;
 
+import android.graphics.Bitmap;
+import android.media.Image;
+import android.widget.ImageView;
+
 public class Food {
 
     private String name;
-    private String desc;
     private String img;
+    private String time;
     private double price;
+    private int foodId;
     private String cafeteria;
+
+    public int getFoodId() {
+        return foodId;
+    }
+
+    public void setFoodId(int foodId) {
+        this.foodId = foodId;
+    }
+
+
 
 
     public Food(){
 
     }
 
-    public Food(String name, String desc, String img, double price, String cafeteria) {
+    public Food(String name, String time, String img, double price, String cafeteria) {
         this.name = name;
-        this.desc = desc;
         this.img = img;
         this.price = price;
         this.cafeteria = cafeteria;
+        this.time=time;
 
     }
 
@@ -31,11 +46,11 @@ public class Food {
     }
 
     public String getDesc() {
-        return desc;
+        return time;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getImg() {
@@ -54,13 +69,6 @@ public class Food {
         this.price = price;
     }
 
-    public String getHotel() {
-        return cafeteria;
-    }
-
-    public void setHotel(String hotel) {
-        this.cafeteria = hotel;
-    }
 
 
 }

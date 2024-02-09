@@ -1,19 +1,27 @@
 package com.example.deliveryapp;
-
-
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.deliveryapp.models.Cafeteria;
 import com.google.gson.Gson;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 
@@ -31,7 +39,7 @@ public class ViewCafeteriaFood extends AppCompatActivity implements RecyclerView
     private boolean flag = false;
     public static final String FLAG = "FLAG";
 
-    private ArrayList<Food> types = new ArrayList<Food>();
+    private ArrayList<Items> types = new ArrayList<Items>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +63,7 @@ public class ViewCafeteriaFood extends AppCompatActivity implements RecyclerView
 
 
 
+
     }
 
     private void setupPrefs() {
@@ -65,9 +74,10 @@ public class ViewCafeteriaFood extends AppCompatActivity implements RecyclerView
 
 
     private void addTypeOfFood() {
-        Food drink=new Food(R.drawable.drink,"Drinks");
-        Food meal=new Food(R.drawable.meal,"Meals");
-        Food sandwich =new Food(R.drawable.sandwich,"Sandwiches");
+
+        Items drink=new Items(R.drawable.drink,"Drinks");
+        Items meal=new Items(R.drawable.meal,"Meals");
+        Items sandwich =new Items(R.drawable.sandwich,"Sandwiches");
 
         types.add(drink);
         types.add(meal);
@@ -75,13 +85,11 @@ public class ViewCafeteriaFood extends AppCompatActivity implements RecyclerView
 
         FoodType_Adapter fadapter = new FoodType_Adapter(this, types, this);
 
-        // Ensure that recFood is not null before calling setLayoutManager
         if (recFood != null) {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
             recFood.setLayoutManager(linearLayoutManager);
             recFood.setAdapter(fadapter);
         } else {
-            // Handle the case where recFood is null (log an error, show a message, etc.)
             Log.e("ViewCafeteriaFood", "recFood is null");
         }}
 
@@ -101,13 +109,15 @@ public class ViewCafeteriaFood extends AppCompatActivity implements RecyclerView
     @Override
     public void onItemClick(int pos) {
 
-//        Food currFood = types.get(pos);
-//        String foodString = gson.toJson(currFood);
-//        editor.putString("Food", foodString);
-//        editor.commit();
+        Items currItem = types.get(pos);
+        currItem.setId(currCafeteria.getId());
+        String itemString = gson.toJson(currItem);
+        editor.putString("ITEM", itemString);
+        Toast.makeText(this, prefs.getString("ITEM",""), Toast.LENGTH_SHORT).show();
+        editor.commit();
 
-       //   Intent intent = new Intent( .this, .class);
-       //  startActivity(intent);
+          Intent intent = new Intent( ViewCafeteriaFood.this,Foods.class);
+         startActivity(intent);
 
 
     }
