@@ -61,7 +61,7 @@ public class FoodType_Adapter extends RecyclerView.Adapter<FoodType_Adapter.View
         public ViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
             // update the ID's to match the new ones in your card_layout.xml
-            imgFood = itemView.findViewById(R.id.itemimgFood);
+            imgFood = itemView.findViewById(R.id.imgFood);
             txtFoodType = itemView.findViewById(R.id.txtFoodType);
 
             itemView.setOnClickListener(new View.OnClickListener() {

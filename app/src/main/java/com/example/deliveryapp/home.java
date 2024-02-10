@@ -30,6 +30,9 @@ public class home extends AppCompatActivity {
 
 
     CardView cardViewOrder;
+    CardView userProfileCard;
+
+    CardView cartViewUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,21 @@ public class home extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+        cartViewUser = findViewById(R.id.cart_view_btn);
+        cartViewUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(home.this,cartView.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
 
         cardViewOrder = findViewById(R.id.my_cardView_order);
         Log.e("MyTag", "This is a debug message 0");
@@ -54,9 +72,19 @@ public class home extends AppCompatActivity {
 
             }
         });
+        userProfileCard = findViewById(R.id.userProfileCard);
+
+        userProfileCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(home.this,UserProfile.class);
+                startActivity((intent));
+
+            }
+        });
+
     }
     private void logoutUser() {
-        FirebaseAuth.getInstance().signOut();
         clearStoredUserData();
         Intent intent = new Intent(home.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

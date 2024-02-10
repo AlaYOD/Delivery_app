@@ -1,12 +1,12 @@
 package com.example.deliveryapp;
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,28 +33,29 @@ public class Food_Adapter extends RecyclerView.Adapter<Food_Adapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // to inflate the layout for each item of recycler view.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_food, parent, false);
         return new ViewHolder(view, recyclerViewInterface);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        // to set data to textview and imageview of each card layout
         Food model = foodArrayList.get(position);
         holder.txtFoodName.setText(model.getName());
-        holder.imgVFood.setImageResource(model.getImg());
 
-        //  Picasso.get().load(model.getImg()).into(holder.imgHotel);
+        String imageName = model.getImg();
+        int resourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
+        if (resourceId != 0) {
+            holder.imgVFood.setImageResource(resourceId);
+        } else {
+            holder.imgVFood.setImageResource(R.drawable.baseline_settings_24);
+        }
     }
 
     @Override
     public int getItemCount() {
-        // this method is used for showing number of card items in recycler view
         return foodArrayList.size();
     }
 
-    // View holder class for initializing of your views such as TextView and Imageview
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView imgVFood;

@@ -1,10 +1,18 @@
 package com.example.deliveryapp;
 
 public class Items {
-
     private int imageResource;
-    private String title;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
+    private String title;
     public Items(int imageResource, String title) {
         this.imageResource = imageResource;
         this.title = title;

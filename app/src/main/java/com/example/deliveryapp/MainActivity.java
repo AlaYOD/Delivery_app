@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     Button buttonLogin;
     FirebaseAuth mAuth;
 
-    public static final String NAME = "NAME";
+    public static final String EMAIL = "EMAIL";
     public static final String PASS = "PASS";
     public static final String FLAG = "FLAG";
     private boolean flag = false;
@@ -93,8 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
                 String email = editTextEmail.getText().toString();
                 String password = editTextPassword.getText().toString();
-                Intent intent = new Intent(MainActivity.this, home.class);
-                startActivity(intent);
+
 
                 if (TextUtils.isEmpty(email)) {
                     progressBar.setVisibility(View.GONE);
@@ -149,6 +148,10 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(() -> {
                             if (response.isSuccessful()) {
                                 Toast.makeText(MainActivity.this, "Success: " + myResponse, Toast.LENGTH_LONG).show();
+                                editor.putString(EMAIL, String.valueOf(editTextEmail.getText()));
+                                editor.putString(PASS,String.valueOf(editTextPassword.getText()));
+                                editor.putBoolean(FLAG, true);
+                                editor.apply();
                                 Intent intent = new Intent(MainActivity.this, home.class);
                                 startActivity(intent);
                                 finish();
@@ -172,12 +175,13 @@ public class MainActivity extends AppCompatActivity {
     private void setupSharedPrefs() {
         prefs= PreferenceManager.getDefaultSharedPreferences(this);
         editor = prefs.edit();
+
     }
     private void checkPrefs() {
         flag = prefs.getBoolean(FLAG, false);
 
         if(flag){
-            String name = prefs.getString(NAME, "");
+            String name = prefs.getString(EMAIL, "");
             String password = prefs.getString(PASS, "");
             editTextEmail.setText(name);
             editTextPassword.setText(password);
