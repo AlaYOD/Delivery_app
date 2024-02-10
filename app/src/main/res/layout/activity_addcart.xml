@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+ >
+
+    <TextView
+
+        android:id="@+id/foodName"
+        android:layout_width="296dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="268dp"
+        android:gravity="center"
+        android:text="FoodName"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtFoodDesc"
+        android:layout_width="367dp"
+        android:layout_height="136dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="252dp"
+        android:background="@drawable/border_textview"
+        android:padding="8dp"
+        android:text="Description"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/txtFoodPrice"
+        android:layout_width="363dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginBottom="176dp"
+        android:background="@drawable/border_textview"
+        android:padding="8dp"
+        android:text="Price"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="124dp"
+        android:text="Number Selected: "
+        android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnAddToCart"
+        android:layout_width="109dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="208dp"
+        android:layout_marginBottom="32dp"
+        android:text="Add To Cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/removeBtn"
+        android:layout_width="65dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="32dp"
+        android:enabled="false"
+        android:text="-"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/addBtn"
+        android:layout_width="65dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginBottom="32dp"
+        android:text="+"
+        android:textSize="33sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgFood"
+        android:layout_width="299dp"
+        android:layout_height="229dp"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/numberSelected"
+        android:layout_width="22dp"
+        android:layout_height="26dp"
+        android:layout_marginBottom="12dp"
+        android:text="1"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddToCart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toEndOf="@+id/textView5" />
+
+    <ImageView
+        android:id="@+id/back"
+        android:layout_width="56dp"
+        android:layout_height="46dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/left_arrow" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

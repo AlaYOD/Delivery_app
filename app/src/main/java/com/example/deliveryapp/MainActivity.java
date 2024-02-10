@@ -73,6 +73,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Cafeterias.class);
+                startActivity(intent);
+
                 Log.d("MyTag", "This is a debug message 2");
 
                 progressBar.setVisibility(View.VISIBLE);
@@ -119,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                     Log.d("MyTag", "This is a debug message 6");
 
-                                    Intent intent = new Intent(MainActivity.this, Cafeterias.class);
-                                    startActivity(intent);
+                                  //  Intent intent = new Intent(MainActivity.this, Cafeterias.class);
+                                 //   startActivity(intent);
                                     finish();
                                 } else {
                                     Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
